@@ -117,38 +117,50 @@ void afficher_entete(char fichier[], int compteurActions)
            RESET, ABANDON, compteurActions);
 }
 
-void afficher_plateau(t_Plateau plateau)
+void afficher_plateau(t_Plateau plateau, int zoom)
 {
-    for (int i = 0; i < TAILLE; i++)
-    {
-        for (int j = 0; j < TAILLE; j++)
+        for (int i = 0; i < TAILLE; i++)
         {
-            char c = plateau[i][j];
+            for(int x = 0; x < 2; x++){
+            for (int j = 0; j < TAILLE; j++)
+            {
+                char c = plateau[i][j];
 
-            if (c == MUR)
-            {
-                printf("#");
+                if (c == MUR)
+                {
+                    for(int y = 0; y < zoom; y++){
+                    printf("#");
+                    }
+                }
+                else if (c == CAISSE || c == CAISSE_CIBLE)
+                {
+                    for(int y = 0; y < zoom; y++){
+                    printf("$");
+                    }
+                }
+                else if (c == SOKOBAN || c == SOKOBAN_CIBLE)
+                {
+                    for(int y = 0; y < zoom; y++){
+                    printf("@");
+                    }
+                }
+                else if (c == CIBLE)
+                {
+                    for(int y = 0; y < zoom; y++){
+                    printf(".");
+                    }
+                }
+                else
+                {
+                    for(int y = 0; y < zoom; y++){
+                    printf(" ");
+                    }
+                }
             }
-            else if (c == CAISSE || c == CAISSE_CIBLE)
-            {
-                printf("$");
-            }
-            else if (c == SOKOBAN || c == SOKOBAN_CIBLE)
-            {
-                printf("@");
-            }
-            else if (c == CIBLE)
-            {
-                printf(".");
-            }
-            else
-            {
-                printf(" ");
+            printf("\n");
             }
         }
-        printf("\n");
     }
-}
 
 void recup_touche(char *adrTouche)
 {
